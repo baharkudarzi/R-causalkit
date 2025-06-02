@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Causal Analysis Placeholder</title>
+</head>
+<body>
+<h1>Causal Analysis RMarkdown Source</h1>
+<p>This file contains the RMarkdown source. To view the fully rendered HTML, please knit <code>causal_analysis.Rmd</code> in RStudio or run the render command in your terminal.</p>
+<pre style="white-space: pre-wrap; font-family: monospace;">
+---
+title: "Causal Inference with R-CausalKit"
+author: "Bahareh Kudarzi"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 3
+    theme: flatly
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo    = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  fig.width  = 6,
+  fig.height = 4
+)
+library(tidyverse)
+library(MatchIt)
+library(cobalt)
+library(survey)
+library(drtmle)
+library(SuperLearner)
+```
+
+# 1. Simulate Data
+
+```{r simulate-data}
+# During knitting, working directory is `notebooks/`, so go up one level to `scripts/`
+source("../scripts/01_simulate_data.R")
+glimpse(df)
+```
+
+# 2. Exploratory Data Analysis
+
+```{r eda-density}
+# Source the EDA script from the project root
+source("../scripts/02_eda_balance.R")
+```
+
+# 3. Propensity Score Matching
+
+```{r psm}
+# Source the matching script
+source("../scripts/03_matchit_psm.R")
+```
+
+# 4. Inverse Probability Weighting
+
+```{r ipw}
+# Source the IPW script
+source("../scripts/04_ipw.R")
+```
+
+# 5. Doubly‐Robust TMLE
+
+```{r drtmle}
+# Source the DRTMLE script (or function‐based wrapper)
+source("../scripts/05_drtmle_dr.R")
+```
+
+# 6. Summary & Conclusions
+
+In this analysis, we have:
+
+- Simulated an A/B testing scenario with confounded covariates.  
+- Performed exploratory plots and calculated pre‐matching balance.  
+- Used Propensity Score Matching to create a balanced subsample and visualized the post‐matching love plot.  
+- Applied Inverse Probability Weighting (IPW) to estimate the ATE with weighted regression.  
+- Implemented a Doubly‐Robust TMLE estimator to obtain a final ATE and 95% CI.
+
+**Key takeaways:**
+
+- The naïve difference‐in‐means is biased due to covariate imbalance.  
+- Both PSM and IPW improved covariate balance, as seen in Love plots and SMD tables.  
+- The Doubly‐Robust TMLE estimate incorporates both outcome regression and propensity scoring, providing consistent ATE under misspecification of one nuisance model.  
+- In our simulated setup (true ATE = 1.5), the TMLE estimate should be close to 1.5 with a narrow confidence interval, demonstrating good performance.
+
+**Potential extensions:**
+
+- Introduce interactions or non‐linear terms into the propensity/outcome models.  
+- Compare Bayesian causal models (e.g., via `rstanarm`) with frequentist TMLE.  
+- Build a Shiny dashboard to let users adjust simulation parameters (sample size, confounding strength) and instantly visualize how each method behaves.
+
+</pre>
+</body>
+</html>

@@ -46,17 +46,16 @@ renv::restore()
 
 ```
 r-causalkit/
-├── data/               # Optional: raw datasets
-├── scripts/            # R scripts for each analysis step
+├── scripts/           
 │   ├── 01_simulate_data.R
 │   ├── 02_eda_balance.R
 │   ├── 03_matchit_psm.R
 │   ├── 04_ipw.R
 │   └── 05_drtmle_dr.R
-├── notebooks/          # RMarkdown reports
+├── notebooks/         
 │   └── causal_analysis.Rmd
-├── results/            # Generated plots and tables
-├── renv.lock           # Locked package versions for reproducibility
+├── results/           
+├── renv.lock         
 └── README.md
 ```
 

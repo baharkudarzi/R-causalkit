@@ -46,16 +46,21 @@ renv::restore()
 
 ```
 r-causalkit/
-├── scripts/           
+├── scripts/
 │   ├── 01_simulate_data.R
 │   ├── 02_eda_balance.R
 │   ├── 03_matchit_psm.R
 │   ├── 04_ipw.R
-│   └── 05_drtmle_dr.R
-├── notebooks/         
+│   ├── 05_drtmle_dr.R
+│   └── 05_drtmle_dr_fn.R
+├── notebooks/
 │   └── causal_analysis.Rmd
-├── results/           
-├── renv.lock         
+├── results/
+│   ├── causal_analysis.html
+│   ├── ipw_results.csv
+│   ├── drtmle_results.csv
+│   └── loveplot_pre_post.png
+├── renv.lock
 └── README.md
 ```
 

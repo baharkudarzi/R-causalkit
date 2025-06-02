@@ -1,0 +1,64 @@
+---
+title: "Causal Inference with R-CausalKit"
+author: "Your Name"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 3
+    theme: flatly
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo    = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  fig.width  = 6,
+  fig.height = 4
+)
+library(tidyverse)
+library(MatchIt)
+library(cobalt)
+library(survey)
+library(drtmle)
+library(SuperLearner)
+```
+
+# 1. Simulate Data
+
+```{r simulate-data}
+source("../scripts/01_simulate_data.R")
+glimpse(df)
+```
+
+# 2. Exploratory Data Analysis
+
+```{r eda-density}
+source("../scripts/02_eda_balance.R")
+```
+
+# 3. Propensity Score Matching
+
+```{r psm}
+source("../scripts/03_matchit_psm.R")
+```
+
+# 4. Inverse Probability Weighting
+
+```{r ipw}
+source("../scripts/04_ipw.R")
+```
+
+# 5. Doubly-Robust TMLE
+
+```{r drtmle}
+source("../scripts/05_drtmle_dr.R")
+```
+
+# 6. Summary & Conclusions
+
+Summarize your findings here:
+- How did naïve vs matched vs weighted vs DR estimates compare?
+- Which method would you recommend, under what assumptions?
+- Potential extensions (e.g., covariate interactions, Bayesian methods, Shiny dashboard).
